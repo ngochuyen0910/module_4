@@ -16,11 +16,7 @@ public class DictionaryRepository implements IDictionaryRepository {
     }
 
     @Override
-    public String value(String vietnamese) {
-        String result = translate.get(vietnamese);
-        if (result == null) {
-            return "khong dich duoc";
-        }
-        return result;
+    public Map<String, String> getData() {
+        return translate;
     }
 }
