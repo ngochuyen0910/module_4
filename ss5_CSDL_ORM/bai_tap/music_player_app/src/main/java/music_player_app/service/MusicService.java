@@ -5,6 +5,7 @@ import music_player_app.repository.IMusicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.SystemException;
 import java.util.List;
 
 @Service
@@ -19,7 +20,11 @@ public class MusicService implements IMusicService {
 
     @Override
     public void save(Music music) {
-        musicRepository.save(music);
+        try {
+            musicRepository.save(music);
+        } catch (SystemException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

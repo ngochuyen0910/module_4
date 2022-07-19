@@ -2,12 +2,13 @@ package music_player_app.repository;
 
 import music_player_app.model.Music;
 
+import javax.transaction.SystemException;
 import java.util.List;
 
 public interface IMusicRepository {
     List<Music> findAll();
 
-    void save(Music music);
+    void save(Music music) throws SystemException;
 
     Music findById(int id);
 
