@@ -1,4 +1,4 @@
-package music_player_app.config;
+package product_management.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -6,7 +6,7 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{music_player_app.config.AppConfiguration.class};
+        return new Class[]{product_management.config.AppConfiguration.class};
     }
 
     @Override

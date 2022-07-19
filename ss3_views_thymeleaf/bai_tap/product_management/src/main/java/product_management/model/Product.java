@@ -1,6 +1,14 @@
 package product_management.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private double price;
@@ -8,18 +16,6 @@ public class Product {
     private String producer;
 
     public Product() {
-    }
-
-    public Product(int id) {
-        this.id = id;
-    }
-
-    public Product(int id, String name, double price, String describe, String producer) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.describe = describe;
-        this.producer = producer;
     }
 
     public int getId() {
@@ -62,13 +58,13 @@ public class Product {
         this.producer = producer;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o instanceof Product) {
-            if (this.id == ((Product) o).getId()) {
-                return true;
-            }
-        }
-        return false;
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (o instanceof Product) {
+//            if (this.id == ((Product) o).getId()) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 }

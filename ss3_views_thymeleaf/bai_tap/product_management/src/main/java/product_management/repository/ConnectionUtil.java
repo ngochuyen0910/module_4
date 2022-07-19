@@ -1,4 +1,4 @@
-package music_player_app.repository;
+package product_management.repository;
 
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
