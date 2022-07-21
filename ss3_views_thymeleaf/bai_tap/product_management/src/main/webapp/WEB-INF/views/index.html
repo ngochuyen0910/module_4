@@ -39,7 +39,7 @@
     <tr th:each="row : ${productList}">
         <td th:text="${row.getName()}"></td>
         <td th:text="${row.getPrice()}"></td>
-        <td th:text="${row.getDescribe()}"></td>
+        <td th:text="${row.getDescribe1()}"></td>
         <td th:text="${row.getProducer()}"></td>
         <td><a th:href="@{/product/{id}/edit(id=${row.getId()})}">edit</a></td>
         <td><a th:href="@{/product/{id}/delete(id=${row.getId()})}">delete</a></td>

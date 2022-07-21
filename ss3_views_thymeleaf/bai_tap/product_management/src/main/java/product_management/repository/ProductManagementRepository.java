@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Transactional
@@ -46,14 +47,12 @@ public class ProductManagementRepository implements IProductManagementRepository
 
     @Override
    public List<Product> findByName(String name) {
-//        List<Product> products = new ArrayList<>();
-//        for (Product product : productList) {
-//            if (product.getName().contains(name)) {
-//                products.add(product);
-//            }
-//        }
-//        return products;
-//    }
-        return null;
-}
+        List<Product> products = new ArrayList<>();
+        for (Product product : products) {
+            if (product.getName().contains(name)) {
+                products.add(product);
+            }
+        }
+        return products;
+    }
 }

@@ -4,7 +4,7 @@ import product_management.model.Product;
 
 import java.util.List;
 
-public interface IProductManagementRepository {
+public interface IProductManagementRepository  {
     List<Product> findAll();
 
     void save(Product product);
