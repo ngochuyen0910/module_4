@@ -1,5 +1,6 @@
 package product_management.repository;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Repository;
 import product_management.model.Product;
 
@@ -17,7 +18,7 @@ public class ProductManagementRepository implements IProductManagementRepository
 
     public ProductManagementRepository() {
     }
-
+    @Modifying
     public List<Product> findAll() {
         TypedQuery<Product> query = this.entityManager.createQuery("SELECT s FROM Product as s", Product.class);
         return query.getResultList();
