@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head"></head>
+<body>
+<h3>Add register</h3>
+<p>
+    <a th:href="@{/register}">
+        Back to register list
+    </a>
+</p>
+<div id="form">
+    <!--/*@thymesVar id="blog" type="com.example"*/-->
+    <form th:action="@{/register/save}" th:object="${registerDto}"
+          method="POST" novalidate="novalidate">
+        <input type="hidden" th:field="*{id}"/>
+        <div>
+            <label>First name</label>
+            <input type="text" th:field="*{firstName}"/>
+            <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
+        </div>
+        <div>
+            <label>Last name</label>
+            <input type="text" th:field="*{lastName}"/>
+            <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+        </div>
+        <div>
+            <label>Phone Number</label>
+            <input type="number" th:field="*{phoneNumber}"/>
+            <span th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></span>
+        </div>
+        <div>
+            <label>Email</label>
+            <input type="text" th:field="*{email}"/>
+            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+        </div>
+        <input type="submit" value="Save"/>
+    </form>
+</div>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>

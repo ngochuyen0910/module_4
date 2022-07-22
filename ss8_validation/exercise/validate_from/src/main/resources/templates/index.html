@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/layout::head}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>Register</h3>
+<p>
+    <a th:href="@{/register/create}">
+        Add new register
+    </a>
+</p>
+
+<div class="notify">
+    <div th:if="${success}">
+        <span th:text="${success}"></span>
+    </div>
+</div>
+<table id="register">
+    <thead>
+    <tr>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Phone number</th>
+        <th>Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="row : ${registerList}">
+        <td th:text="${row.getFirstName()}"></td>
+        <td th:text="${row.getLastName()}"></td>
+        <td th:text="${row.getPhoneNumber()}"></td>
+        <td th:text="${row.getEmail()}"></td>
+    </tr>
+    </tbody>
+</table>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>
