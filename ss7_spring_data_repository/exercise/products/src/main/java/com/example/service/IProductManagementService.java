@@ -21,5 +21,5 @@ public interface IProductManagementService {
 
     Page<Product> findAll(Pageable pageable);
 
-   Page<Product> findByNameContaining(String name, Pageable pageable);
+    Page<Product> findByNameContaining(String name, Pageable pageable);
 }

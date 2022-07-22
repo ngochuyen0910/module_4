@@ -1,19 +1,22 @@
 package com.example.controller;
 
+import com.example.dto.ProductDto;
 import com.example.model.Product;
 import com.example.service.IProductManagementService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
-
 
 @Controller
 @RequestMapping("/product")
@@ -25,7 +28,7 @@ public class ProductController {
     public String index(Model model) {
         List<Product> productList = productManagementService.findAll();
         model.addAttribute("productList", productList);
-        return "/index";
+        return "index";
     }
 
     @GetMapping("")
@@ -35,14 +38,26 @@ public class ProductController {
 
     @GetMapping("/create")
     public String create(Model model) {
-        model.addAttribute("product", new Product());
-        return "/create";
+        model.addAttribute("productDto", new ProductDto());
+        return "create";
     }
 
     @PostMapping("/save")
-    public String save(Product product) {
-        //product.setId((int) (Math.random() * 10000));
-        productManagementService.save(product);
+    public String save(@ModelAttribute @Validated ProductDto productDto,
+                       BindingResult bindingResult,
+                       RedirectAttributes redirectAttributes,
+                       Model model) {
+        new ProductDto().validate(productDto, bindingResult);
+        if (bindingResult.hasFieldErrors()) {
+            return "create";
+        } else {
+            Product product = new Product();
+            BeanUtils.copyProperties(productDto, product);
+
+            productManagementService.save(product);
+            redirectAttributes.addFlashAttribute("message", "Create OK!");
+            model.addAttribute("productList", productManagementService.findAll());
+        }
         return "redirect:/product";
     }
 
