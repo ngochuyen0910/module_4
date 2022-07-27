@@ -34,10 +34,8 @@
                     <td th:text="${productMap.key.price * productMap.value}"></td>
                     <td><a th:href="@{/shop/delete/__${productMap.key.id}__}">
                         <button class="btn btn-danger">Delete</button>
-                    </a></td>
-<!--                    <td><a href="/#">-->
-<!--                        <button class="btn btn-danger">Delete</button>-->
-<!--                    </a></td>-->
+                    </a>
+                    </td>
                 </tr>
                 <tr>
                     <th colspan="4">Total money</th>

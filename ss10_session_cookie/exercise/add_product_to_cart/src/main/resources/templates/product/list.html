@@ -33,7 +33,9 @@
                     <td th:text="${product.description}"></td>
                     <td th:text="${product.price}"></td>
                     <td>
-                        <a th:href="@{/shop/add/__${product.id}__}">+</a>
+                        <a th:href="@{/shop/add/__${product.id}__}">
+                            <button class="btn btn-success">Add</button>
+                        </a>
                     </td>
                 </tr>
                 </tbody>

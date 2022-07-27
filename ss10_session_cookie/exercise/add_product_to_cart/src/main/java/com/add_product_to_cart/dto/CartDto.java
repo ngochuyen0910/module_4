@@ -26,7 +26,7 @@ public class CartDto {
         }
     }
 
-    public Integer countProductQuantity(){
+    public Integer countProductQuantity() {
         Integer productQuantity = 0;
         for (Map.Entry<ProductDto, Integer> entry : productMap.entrySet()) {
             productQuantity += entry.getValue();
@@ -34,18 +34,19 @@ public class CartDto {
         return productQuantity;
     }
 
-    public Integer countItemQuantity(){
+    public Integer countItemQuantity() {
         return productMap.size();
     }
 
-    public Float countTotalPayment(){
+    public Float countTotalPayment() {
         float payment = 0;
         for (Map.Entry<ProductDto, Integer> entry : productMap.entrySet()) {
             payment += entry.getKey().getPrice() * (float) entry.getValue();
         }
         return payment;
     }
-    public void remove(ProductDto productDto){
+
+    public void remove(ProductDto productDto) {
         productMap.remove(productDto);
     }
 }
