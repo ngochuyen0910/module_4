@@ -11,6 +11,7 @@ public class Blog {
     private String content;
 
     @ManyToOne
+   // @JsonManagedReference
     @JoinColumn(name="category_id",referencedColumnName = "id")
     private Category category;
 
@@ -55,4 +56,6 @@ public class Blog {
     public void setContent(String content) {
         this.content = content;
     }
+
+
 }
