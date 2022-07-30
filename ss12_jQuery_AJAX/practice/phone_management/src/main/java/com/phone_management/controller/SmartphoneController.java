@@ -21,6 +21,15 @@ public class SmartphoneController {
         return new ResponseEntity<>(smartphoneService.save(smartphone), HttpStatus.CREATED);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Smartphone> findById(@PathVariable Long id) {
+        if (!smartphoneService.findById(id).isPresent()){
+            return new ResponseEntity<>(smartphoneService.findById(id).get(), HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(smartphoneService.findById(id).get(), HttpStatus.OK);
+
+    }
+
     @GetMapping
     public ResponseEntity<Iterable<Smartphone>> allPhones() {
         return new ResponseEntity<>(smartphoneService.findAll(), HttpStatus.OK);
