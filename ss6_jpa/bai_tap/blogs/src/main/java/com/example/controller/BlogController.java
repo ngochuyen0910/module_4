@@ -2,6 +2,7 @@ package com.example.controller;
 
 import com.example.model.Blog;
 import com.example.service.IBlogService;
+import com.example.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +21,9 @@ public class BlogController {
     @Autowired
     private IBlogService blogService;
 
+    @Autowired
+    private ICategoryService categoryService;
+
     @GetMapping("/a")
     public String index(Model model) {
         List<Blog> blogList = blogService.findAll();
@@ -28,13 +32,19 @@ public class BlogController {
     }
 
     @GetMapping("")
-    public ModelAndView findAll(@PageableDefault(value = 2) Pageable pageable) {
-        return new ModelAndView("index", "blogList", blogService.findAll(pageable));
+    public String findAll(@PageableDefault(value = 2) Pageable pageable,
+                                Model model) {
+        System.out.println("he3");
+        model.addAttribute("blogList",blogService.findAll(pageable));
+        System.out.println("he4");
+//        new ModelAndView("index.html", "blogList", blogService.findAll(pageable));
+        return "/index";
     }
 
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("blog", new Blog());
+        model.addAttribute("categoryList",categoryService.findAll());
         return "/create";
     }
 
@@ -79,7 +89,7 @@ public class BlogController {
     @GetMapping("/search")
     public ModelAndView search(@RequestParam("search")
                                        String search, @PageableDefault(value = 1) Pageable pageable) {
-        Page<Blog> blogs = blogService.findByNameContaining("%" + search + "%", pageable);
+        Page<Blog> blogs = blogService.findByNameContaining(search, pageable);
         ModelAndView modelAndView = new ModelAndView("/index");
         modelAndView.addObject("blogList", blogs);
         return modelAndView;

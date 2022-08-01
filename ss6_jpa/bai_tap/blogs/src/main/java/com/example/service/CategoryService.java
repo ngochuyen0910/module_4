@@ -1,12 +1,12 @@
 package com.example.service;
 
-import com.example.model.Blog;
 import com.example.model.Category;
 import com.example.repository.ICategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @Service

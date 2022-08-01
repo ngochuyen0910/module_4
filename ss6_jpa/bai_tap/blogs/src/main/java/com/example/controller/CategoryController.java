@@ -23,6 +23,7 @@ public class CategoryController {
         model.addAttribute("categoryList", categoryList);
         return "/category";
     }
+
     @GetMapping("/create_category")
     public String create(Model model) {
         model.addAttribute("category", new Category());

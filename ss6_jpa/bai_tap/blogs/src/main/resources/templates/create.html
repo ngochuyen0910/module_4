@@ -21,6 +21,13 @@
             <label>Content</label>
             <input type="text" th:field="*{content}"/>
         </div>
+        <div>
+            <label>Category</label>
+            <select th:field="*{category}">
+                <option th:each="p : ${categoryList}"
+                        th:value="${p.id}" th:text="${p.nameCategory}"></option>
+            </select>
+        </div>
         <input type="submit" value="Save"/>
     </form>
 </div>
