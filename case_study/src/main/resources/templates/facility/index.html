@@ -48,7 +48,36 @@
         <td th:text="${facility.rentType.rentTypeName}"></td>
         <td th:text="${facility.facilityType.facilityTypeName}"></td>
         <td><a th:href="@{/facility/{id}/edit(id=${facility.getFacilityId()})}">edit</a></td>
-        <td><a th:href="@{/facility/{id}/delete(id=${facility.getFacilityId()})}">delete</a></td>
+        <td>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                    th:data-bs-target="'#a' + ${facility.facilityId}">
+                Delete
+            </button>
+            <div class="modal fade" th:contractId="a + ${facility.facilityId}" data-bs-backdrop="static"
+                 data-bs-keyboard="false"
+                 tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <form th:action="@{/facility/delete}"
+                          method="POST">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" contractId="staticBackdropLabel">Modal title</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Do you want delete
+                                <span class="text-info" th:text="${facility.facilityName}"></span>
+                                <input type="hidden" th:value="${facility.facilityId}" name="contractId">
+                            </div>
+                            <button type="submit" class="btn btn-outline-success">Delete</button>
+                            <button type="button" class="btn btn-secondary center-pill" data-bs-dismiss="modal">Close
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </td>
     </tr>
 </table>
 <div>

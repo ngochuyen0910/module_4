@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/layout::head}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="~{/layout::header}"></div>
+<p>
+    <a th:href="@{/contract/create}">
+        Add new contract
+    </a>
+</p>
+<table id="furama">
+    <tr>
+        <th>Id</th>
+        <th>Customer Name</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Deposit</th>
+    </tr>
+    <tr th:each="contract,status : ${contractList}">
+        <td th:text="${contract.contractId}"></td>
+        <td th:text="${contract.customer.customerName}"></td>
+        <td th:text="${contract.startDate}"></td>
+        <td th:text="${contract.endDate}"></td>
+        <td th:text="${contract.deposit}"></td>
+    </tr>
+</table>
+<div>
+    <a th:href="@{'/contract'(page=${contractList.number - 1})}" th:if="${contractList.hasPrevious()}">Previous</a>
+    <span th:text="${contractList.number + 1}"></span>/<span th:text="${contractList.totalPages}"></span>
+    <a th:href="@{'/contract'(page=${contractList.number + 1})}" th:if="${contractList.hasNext()}">Next</a>
+</div>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>

@@ -73,6 +73,7 @@ public class FacilityController {
     @GetMapping("/{id}/edit")
     public String edit(@PathVariable int id, Model model) {
         model.addAttribute("facility", facilityService.findById(id));
+        model.addAttribute("rentTypeList", rentTypeService.findAll());
         model.addAttribute("facilityTypeList", facilityTypeService.findAll());
         return "/facility/edit";
     }
@@ -94,6 +95,18 @@ public class FacilityController {
             redirectAttributes.addFlashAttribute("message", "Create OK!");
             model.addAttribute("facilityList", facilityService.findAll());
         }
+        return "redirect:/facility";
+    }
+
+    @GetMapping("/{id}/delete")
+    private String delete(@PathVariable int id, Model model) {
+        model.addAttribute("facility", facilityService.findById(id));
+        return "/facility/delete";
+    }
+
+    @PostMapping("/delete")
+    public String delete(int id) {
+        facilityService.remove(id);
         return "redirect:/facility";
     }
 }

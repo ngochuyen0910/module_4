@@ -12,7 +12,7 @@
     </a>
 </p>
 <div id="form">
-    <form th:action="@{/facility/save}" th:object="${facility}"
+    <form th:action="@{/facility/delete}" th:object="${facility}"
           method="POST" novalidate="novalidate">
         <input type="hidden" th:field="*{facilityId}"/>
         <div>
@@ -25,7 +25,7 @@
         <div>
             <label>Facility Name</label>
             <input type="text" th:field="*{facilityName}"/>
-<!--            <span th:if="${#fields.hasErrors('facilityName')}" th:errors="*{facilityName}"></span>-->
+            <!--            <span th:if="${#fields.hasErrors('facilityName')}" th:errors="*{facilityName}"></span>-->
         </div>
         <div>
             <label>Area</label>
@@ -54,7 +54,7 @@
         <div class="villa house">
             <label>Number Of Floors</label>
             <input type="number" th:field="*{numberOfFloors}"/>
-<!--            <span th:if="${#fields.hasErrors('numberOfFloors')}" th:errors="*{numberOfFloors}"></span>-->
+            <!--            <span th:if="${#fields.hasErrors('numberOfFloors')}" th:errors="*{numberOfFloors}"></span>-->
         </div>
         <div class="room" style="display: none">
             <label>Facility Free</label>
@@ -67,7 +67,7 @@
                         th:value="${item.rentTypeId}"></option>
             </select>
         </div>
-        <input type="submit" value="Save"/>
+        <input type="submit" value="Remove"/>
     </form>
 </div>
 <script>

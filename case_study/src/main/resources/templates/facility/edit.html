@@ -17,7 +17,7 @@
         <input type="hidden" th:field="*{facilityId}"/>
         <div>
             <label>Facility Type</label>
-            <select class="form-control" th:field="*{facilityType}" onchange="facilitys(this.value)">
+            <select class="form-control" contractId="type" th:field="*{facilityType}" onchange="facilitys(this.value)">
                 <option th:each="item:${facilityTypeList}" th:text="${item.facilityTypeName}"
                         th:value="${item.facilityTypeId}"></option>
             </select>
@@ -69,7 +69,34 @@
     </form>
 </div>
 <script>
-    function facilitys(id) {
+    let contractId = document.getElementById("type").value;
+    house = document.getElementsByClassName("house");
+    room = document.getElementsByClassName("room");
+    villa = document.getElementsByClassName("villa");
+    for (let i = 0; i < house.length; i++) {
+        house[i].style.display = "none";
+    }
+    for (let i = 0; i < room.length; i++) {
+        room[i].style.display = "none";
+    }
+    for (let i = 0; i < villa.length; i++) {
+        villa[i].style.display = "none";
+    }
+    if (contractId == 1) {
+        for (let i = 0; i < villa.length; i++) {
+            villa[i].style.display = "block";
+        }
+    } else if (contractId == 2) {
+        for (let i = 0; i < house.length; i++) {
+            house[i].style.display = "block";
+        }
+    } else {
+        for (let i = 0; i < room.length; i++) {
+            room[i].style.display = "block";
+        }
+    }
+
+    function facilitys(contractId) {
         house = document.getElementsByClassName("house");
         room = document.getElementsByClassName("room");
         villa = document.getElementsByClassName("villa");
@@ -82,11 +109,11 @@
         for (let i = 0; i < villa.length; i++) {
             villa[i].style.display = "none";
         }
-        if (id == 1) {
+        if (contractId == 1) {
             for (let i = 0; i < villa.length; i++) {
                 villa[i].style.display = "block";
             }
-        } else if (id == 2) {
+        } else if (contractId == 2) {
             for (let i = 0; i < house.length; i++) {
                 house[i].style.display = "block";
             }

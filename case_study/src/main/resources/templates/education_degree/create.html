@@ -13,7 +13,7 @@
     </a>
 </p>
 <div id="form">
-    <!--/*@thymesVar id="blog" type="com.example"*/-->
+    <!--/*@thymesVar contractId="blog" type="com.example"*/-->
     <form th:action="@{/education_degree/save}" th:object="${educationDegreeList}"
           method="POST" novalidate="novalidate">
         <input type="hidden" th:field="*{educationDegreeId}"/>

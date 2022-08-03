@@ -12,7 +12,7 @@
     </a>
 </p>
 <div id="form">
-    <!--/*@thymesVar id="blog" type="com.example"*/-->
+    <!--/*@thymesVar contractId="blog" type="com.example"*/-->
     <form th:action="@{/customer_type/save}" th:object="${customerTypeList}"
           method="POST" novalidate="novalidate">
         <input type="hidden" th:field="*{customerTypeId}"/>

@@ -11,8 +11,8 @@
         Back to position list
     </a>
 </p>
-<div id="form">
-    <!--/*@thymesVar id="blog" type="com.example"*/-->
+<div contractId="form">
+    <!--/*@thymesVar contractId="blog" type="com.example"*/-->
     <form th:action="@{/position/save}" th:object="${positionList}"
           method="POST" novalidate="novalidate">
         <input type="hidden" th:field="*{positionId}"/>
