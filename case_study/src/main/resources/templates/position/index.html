@@ -1,10 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-$END$
+<h3>position</h3>
+<p>
+    <a th:href="@{/position/create}">
+        Add new division
+    </a>
+</p>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+    </tr>
+    <tr th:each="positions,status : ${positionList}">
+        <td th:text="${positions.positionId}"></td>
+        <td th:text="${positions.positionName}"></td>
+    </tr>
+</table>
 </body>
 </html>

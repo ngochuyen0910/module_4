@@ -1,10 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/layout::head}">
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-$END$
+<div th:replace="~{/layout::header}"></div>
+<p>
+    <a th:href="@{/customer/create}">
+        Add new customer
+    </a>
+</p>
+<table id="furama">
+    <tr>
+        <th>STT</th>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Date Of Birth</th>
+        <th>Gender</th>
+        <th>Id card</th>
+        <th>Phone number</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Customer type</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    <tr th:each="customer,status : ${customerList}">
+        <td th:text="${customer.customerId}"></td>
+        <td th:text="${customer.customerCode}"></td>
+        <td th:text="${customer.customerName}"></td>
+        <td th:text="${customer.customerBirthday}"></td>
+        <td th:if="${customer.customerGender==0}" th:text="Male"></td>
+        <td th:if="${customer.customerGender==1}" th:text="Female"></td>
+        <td th:text="${customer.customerIdCard}"></td>
+        <td th:text="${customer.customerPhone}"></td>
+        <td th:text="${customer.customerMail}"></td>
+        <td th:text="${customer.customerAddress}"></td>
+        <td th:text="${customer.customerType.customerTypeName}"></td>
+        <td><a th:href="@{/customer/{id}/edit(id=${customer.getCustomerId()})}">edit</a></td>
+        <td>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                    th:data-bs-target="'#a' + ${customer.customerId}">
+                Delete
+            </button>
+            <div class="modal fade" th:id="a + ${customer.customerId}" data-bs-backdrop="static"
+                 data-bs-keyboard="false"
+                 tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <form th:action="@{/customer/delete}"
+                          method="POST">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Do you want delete
+                                <span class="text-info" th:text="${customer.customerName}"></span>
+                                <input type="hidden" th:value="${customer.customerId}" name="id">
+                            </div>
+
+                            <button type="submit" class="btn btn-outline-success">Delete</button>
+                            <button type="button" class="btn btn-secondary center-pill" data-bs-dismiss="modal">Close
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+<div>
+    <a th:href="@{'/customer'(page=${customerList.number - 1})}" th:if="${customerList.hasPrevious()}">Previous</a>
+    <span th:text="${customerList.number + 1}"></span>/<span th:text="${customerList.totalPages}"></span>
+    <a th:href="@{'/customer'(page=${customerList.number + 1})}" th:if="${customerList.hasNext()}">Next</a>
+</div>
+<footer th:replace="/layout :: footer"></footer>
 </body>
 </html>

@@ -35,7 +35,7 @@ public class CustomerController {
     }
 
     @GetMapping("")
-    public ModelAndView findAll(@PageableDefault(value = 2) Pageable pageable) {
+    public ModelAndView findAll(@PageableDefault(value = 3) Pageable pageable) {
         return new ModelAndView("customer/index", "customerList", customerService.findAll(pageable));
     }
 
@@ -67,13 +67,28 @@ public class CustomerController {
 
     @GetMapping("/{id}/edit")
     public String edit(@PathVariable int id, Model model) {
-        model.addAttribute("customer", customerService.findById(id));
+        model.addAttribute("customerDto", customerService.findById(id));
+        model.addAttribute("customerTypeList", customerTypeService.findAll());
         return "/customer/edit";
     }
 
     @PostMapping("/update")
-    public String update(Customer customer) {
-        customerService.update(customer.getCustomerId(), customer);
+    public String update(@ModelAttribute @Validated CustomerDto customerDto,
+                         BindingResult bindingResult,
+                         RedirectAttributes redirectAttributes,
+                         Model model) {
+        new CustomerDto().validate(customerDto, bindingResult);
+        if (bindingResult.hasFieldErrors()) {
+            model.addAttribute("customerTypeList", customerTypeService.findAll());
+            return "customer/edit";
+        } else {
+            Customer customer = new Customer();
+            BeanUtils.copyProperties(customerDto, customer);
+
+            customerService.update(customer.getCustomerId(), customer);
+            redirectAttributes.addFlashAttribute("message", "Create OK!");
+            model.addAttribute("customerList", customerService.findAll());
+        }
         return "redirect:/customer";
     }
 
@@ -84,9 +99,8 @@ public class CustomerController {
     }
 
     @PostMapping("/delete")
-    public String delete(Customer customer, RedirectAttributes redirect) {
-        customerService.remove(customer.getCustomerId());
-        redirect.addFlashAttribute("success", "Removed category successfully!");
+    public String delete(int id) {
+        customerService.remove(id);
         return "redirect:/customer";
     }
 }

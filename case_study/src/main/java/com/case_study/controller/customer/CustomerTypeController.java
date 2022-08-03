@@ -1,4 +1,4 @@
-package com.case_study.model.employee;
+package com.case_study.controller.customer;
 
 import com.case_study.model.customer.CustomerType;
 import com.case_study.service.customer_type.ICustomerTypeService;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("/customer_type")
+@RequestMapping("customer_type")
 public class CustomerTypeController {
     @Autowired
     private ICustomerTypeService customerTypeService;
@@ -21,13 +21,13 @@ public class CustomerTypeController {
     public String index(Model model) {
         List<CustomerType> customerTypeList = customerTypeService.findAll();
         model.addAttribute("customerTypeList", customerTypeList);
-        return "/customer_type/index";
+        return "customer_type/index";
     }
 
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("customerTypeList", new CustomerType());
-        return "/customer_type/create";
+        return "customer_type/create";
     }
 
     @PostMapping("/save")

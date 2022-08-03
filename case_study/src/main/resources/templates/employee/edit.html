@@ -1,10 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/layout::head}">
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-$END$
+<div th:replace="~{/layout::header}"></div>
+<p>
+    <a th:href="@{/employee}">
+        Back to employee list
+    </a>
+</p>
+<div id="form">
+    <form th:action="@{/employee/update}" th:object="${employeeDto}"
+          method="POST" novalidate="novalidate">
+        <input type="hidden" th:field="*{employeeId}"/>
+        <div>
+            <label>Employee Name</label>
+            <input type="text" th:field="*{employeeName}"/>
+            <span th:if="${#fields.hasErrors('employeeName')}" th:errors="*{employeeName}"></span>
+        </div>
+        <div>
+            <label>Employee Birthday</label>
+            <input type="text" th:field="*{employeeBirthday}"/>
+            <span th:if="${#fields.hasErrors('employeeBirthday')}" th:errors="*{employeeBirthday}"></span>
+        </div>
+        <div>
+            <label>Employee IdCard</label>
+            <input type="number" th:field="*{employeeIdCard}"/>
+            <span th:if="${#fields.hasErrors('employeeIdCard')}" th:errors="*{employeeIdCard}"></span>
+        </div>
+        <div>
+            <label>Employee Salary</label>
+            <input type="number" th:field="*{employeeSalary}"/>
+            <span th:if="${#fields.hasErrors('employeeSalary')}" th:errors="*{employeeSalary}"></span>
+        </div>
+        <div>
+            <label>Employee Phone</label>
+            <input type="number" th:field="*{employeePhone}"/>
+            <span th:if="${#fields.hasErrors('employeePhone')}" th:errors="*{employeePhone}"></span>
+        </div>
+        <div>
+            <label>Employee Email:</label>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" aria-label="Recipient's username"
+                       aria-describedby="basic-addon2" th:field="*{employeeEmail}">
+                <span class="input-group-text" id="basic-addon2">@gmail.com</span>
+            </div>
+            <p th:if="${#fields.hasErrors('employeeEmail')}" th:errors="*{employeeEmail}"></p>
+        </div>
+        <div>
+            <label>Employee Address</label>
+            <input type="text" th:field="*{employeeAddress}"/>
+            <span th:if="${#fields.hasErrors('employeeAddress')}" th:errors="*{employeeAddress}"></span>
+        </div>
+        <div>
+            <label>Position</label>
+            <select class="form-control" th:field="*{position}">
+                <option th:each="item:${positionList}" th:text="${item.positionName}"
+                        th:value="${item.positionId}"></option>
+            </select>
+        </div>
+        <div>
+            <label>Education Degree</label>
+            <select class="form-control" th:field="*{educationDegree}">
+                <option th:each="item:${educationDegreeList}" th:text="${item.educationDegreeName}"
+                        th:value="${item.educationDegreeId}"></option>
+            </select>
+        </div>
+        <div>
+            <label>Division</label>
+            <select class="form-control" th:field="*{divisions}">
+                <option th:each="item:${divisionList}" th:text="${item.divisionName}"
+                        th:value="${item.divisionId}"></option>
+            </select>
+        </div>
+        <input type="submit" value="Edit"/>
+    </form>
+</div>
+<footer th:replace="/layout :: footer"></footer>
 </body>
 </html>

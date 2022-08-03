@@ -1,10 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-$END$
+<body>
+<h3>Add Division</h3>
+<p>
+    <a th:href="@{/education_degree}">
+        Back to education_degree list
+    </a>
+</p>
+<div id="form">
+    <!--/*@thymesVar id="blog" type="com.example"*/-->
+    <form th:action="@{/education_degree/save}" th:object="${educationDegreeList}"
+          method="POST" novalidate="novalidate">
+        <input type="hidden" th:field="*{educationDegreeId}"/>
+        <div>
+            <label>Name</label>
+            <input type="text" th:field="*{educationDegreeName}"/>
+        </div>
+        <input type="submit" value="Save"/>
+    </form>
+</div>
 </body>
 </html>

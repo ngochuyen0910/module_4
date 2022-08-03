@@ -1,10 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/layout::head}">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-
+<div th:replace="~{/layout::header}"></div>
+<p>
+    <a th:href="@{/facility/create}">
+        Add new facility
+    </a>
+</p>
+<div class="notify">
+    <div th:if="${success}">
+        <span th:text="${success}"></span>
+    </div>
+</div>
+<table id="furama">
+    <tr>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Area</th>
+        <th>Cost</th>
+        <th>Max people</th>
+        <th>Standard room</th>
+        <th>Description other convenience</th>
+        <th>Pool area</th>
+        <th>Number of floors</th>
+        <th>Facility free</th>
+        <th>Rent type</th>
+        <th>Facility type</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    <tr th:each="facility,status : ${facilityList}">
+        <td th:text="${facility.facilityId}"></td>
+        <td th:text="${facility.facilityName}"></td>
+        <td th:text="${facility.area}"></td>
+        <td th:text="${facility.cost}"></td>
+        <td th:text="${facility.maxPeople}"></td>
+        <td th:text="${facility.standardRoom}"></td>
+        <td th:text="${facility.descriptionOtherConvenience}"></td>
+        <td th:text="${facility.poolArea}"></td>
+        <td th:text="${facility.numberOfFloors}"></td>
+        <td th:text="${facility.facilityFree}"></td>
+        <td th:text="${facility.rentType.rentTypeName}"></td>
+        <td th:text="${facility.facilityType.facilityTypeName}"></td>
+        <td><a th:href="@{/facility/{id}/edit(id=${facility.getFacilityId()})}">edit</a></td>
+        <td><a th:href="@{/facility/{id}/delete(id=${facility.getFacilityId()})}">delete</a></td>
+    </tr>
+</table>
+<div>
+    <a th:href="@{'/facility'(page=${facilityList.number - 1})}" th:if="${facilityList.hasPrevious()}">Previous</a>
+    <span th:text="${facilityList.number + 1}"></span>/<span th:text="${facilityList.totalPages}"></span>
+    <a th:href="@{'/facility'(page=${facilityList.number + 1})}" th:if="${facilityList.hasNext()}">Next</a>
+</div>
+<footer th:replace="/layout :: footer"></footer>
 </body>
 </html>

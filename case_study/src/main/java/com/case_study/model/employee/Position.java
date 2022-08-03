@@ -4,16 +4,16 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-public class Positions {
+public class Position {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int positionId;
     private String positionName;
 
-    @OneToMany(mappedBy = "positions")
+    @OneToMany(mappedBy = "position")
     private Set<Employee> employee;
 
-    public Positions() {
+    public Position() {
     }
 
     public int getPositionId() {

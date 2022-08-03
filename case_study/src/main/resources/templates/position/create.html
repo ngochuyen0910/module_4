@@ -1,10 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-$END$
+<h3>Add position</h3>
+<p>
+    <a th:href="@{/position}">
+        Back to position list
+    </a>
+</p>
+<div id="form">
+    <!--/*@thymesVar id="blog" type="com.example"*/-->
+    <form th:action="@{/position/save}" th:object="${positionList}"
+          method="POST" novalidate="novalidate">
+        <input type="hidden" th:field="*{positionId}"/>
+        <div>
+            <label>Name</label>
+            <input type="text" th:field="*{positionName}"/>
+        </div>
+        <input type="submit" value="Save"/>
+    </form>
+</div>
 </body>
 </html>

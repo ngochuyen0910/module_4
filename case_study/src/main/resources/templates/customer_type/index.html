@@ -1,10 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-$END$
+<h3>Customer</h3>
+<p>
+    <a th:href="@{/customer_type/create}">
+        Add new customer
+    </a>
+</p>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+    </tr>
+    <tr th:each="customer,status : ${customerTypeList}">
+        <td th:text="${customer.customerTypeId}"></td>
+        <td th:text="${customer.customerTypeName}"></td>
+    </tr>
+</table>
 </body>
 </html>

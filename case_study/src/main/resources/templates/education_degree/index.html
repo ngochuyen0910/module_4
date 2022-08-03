@@ -1,10 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-$END$
+<h3>education_degree</h3>
+<p>
+    <a th:href="@{/education_degree/create}">
+        Add new education degree
+    </a>
+</p>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+    </tr>
+    <tr th:each="education_degree,status : ${educationDegreeList}">
+        <td th:text="${education_degree.educationDegreeId}"></td>
+        <td th:text="${education_degree.educationDegreeName}"></td>
+    </tr>
+</table>
 </body>
 </html>

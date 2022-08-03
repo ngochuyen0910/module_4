@@ -1,10 +1,102 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/layout::head}">
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-$END$
+<div th:replace="~{/layout::header}"></div>
+<p>
+    <a th:href="@{/facility}">
+        Back to facility list
+    </a>
+</p>
+<div id="form">
+    <form th:action="@{/facility/update}" th:object="${facility}"
+          method="POST" novalidate="novalidate">
+        <input type="hidden" th:field="*{facilityId}"/>
+        <div>
+            <label>Facility Type</label>
+            <select class="form-control" th:field="*{facilityType}" onchange="facilitys(this.value)">
+                <option th:each="item:${facilityTypeList}" th:text="${item.facilityTypeName}"
+                        th:value="${item.facilityTypeId}"></option>
+            </select>
+        </div>
+        <div>
+            <label>Facility Name</label>
+            <input type="text" th:field="*{facilityName}"/>
+        </div>
+        <div>
+            <label>Area</label>
+            <input type="number" th:field="*{area}"/>
+        </div>
+        <div>
+            <label>Cost</label>
+            <input type="number" th:field="*{cost}"/>
+        </div>
+        <div>
+            <label>Max People</label>
+            <input type="number" th:field="*{maxPeople}"/>
+        </div>
+        <div class="villa house">
+            <label>Standard Room</label>
+            <input type="text" th:field="*{standardRoom}"/>
+        </div>
+        <div class="villa house">
+            <label>Description Other Convenience</label>
+            <input type="text" th:field="*{descriptionOtherConvenience}"/>
+        </div>
+        <div class="villa">
+            <label>Pool Area</label>
+            <input type="number" th:field="*{poolArea}"/>
+        </div>
+        <div class="villa house">
+            <label>Number Of Floors</label>
+            <input type="number" th:field="*{numberOfFloors}"/>
+        </div>
+        <div class="room" style="display: none">
+            <label>Facility Free</label>
+            <input type="text" th:field="*{facilityFree}"/>
+        </div>
+        <div>
+            <label>Rent Type</label>
+            <select class="form-control" th:field="*{rentType}">
+                <option th:each="item:${rentTypeList}" th:text="${item.rentTypeName}"
+                        th:value="${item.rentTypeId}"></option>
+            </select>
+        </div>
+        <input type="submit" value="Edit"/>
+    </form>
+</div>
+<script>
+    function facilitys(id) {
+        house = document.getElementsByClassName("house");
+        room = document.getElementsByClassName("room");
+        villa = document.getElementsByClassName("villa");
+        for (let i = 0; i < house.length; i++) {
+            house[i].style.display = "none";
+        }
+        for (let i = 0; i < room.length; i++) {
+            room[i].style.display = "none";
+        }
+        for (let i = 0; i < villa.length; i++) {
+            villa[i].style.display = "none";
+        }
+        if (id == 1) {
+            for (let i = 0; i < villa.length; i++) {
+                villa[i].style.display = "block";
+            }
+        } else if (id == 2) {
+            for (let i = 0; i < house.length; i++) {
+                house[i].style.display = "block";
+            }
+        } else {
+            for (let i = 0; i < room.length; i++) {
+                room[i].style.display = "block";
+            }
+        }
+    }
+</script>
+<footer th:replace="/layout :: footer"></footer>
 </body>
 </html>
