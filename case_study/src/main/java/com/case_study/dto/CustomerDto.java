@@ -9,7 +9,7 @@ import javax.validation.constraints.Pattern;
 
 public class CustomerDto implements Validator {
     private Integer customerId;
-
+    @NotBlank
     @Pattern(regexp = "^(KH)-[0-9]{4}$", message = "Please re-enter in the format : KH-XXXX (X: 0-9)")
     private String customerCode;
     @NotBlank

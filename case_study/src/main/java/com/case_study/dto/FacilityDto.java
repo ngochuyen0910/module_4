@@ -23,7 +23,7 @@ public class FacilityDto implements Validator {
     private double poolArea;
 //    @NotBlank
 //    @Min(0)
-    private int numberOfFloors;
+    private String numberOfFloors;
     private String facilityFree;
     private RentType rentType;
     private FacilityType facilityType;
@@ -95,11 +95,11 @@ public class FacilityDto implements Validator {
         this.poolArea = poolArea;
     }
 
-    public int getNumberOfFloors() {
+    public String getNumberOfFloors() {
         return numberOfFloors;
     }
 
-    public void setNumberOfFloors(int numberOfFloors) {
+    public void setNumberOfFloors(String numberOfFloors) {
         this.numberOfFloors = numberOfFloors;
     }
 
@@ -136,5 +136,4 @@ public class FacilityDto implements Validator {
     public void validate(Object target, Errors errors) {
 
     }
-
 }

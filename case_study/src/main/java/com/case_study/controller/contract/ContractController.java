@@ -1,7 +1,6 @@
 package com.case_study.controller.contract;
 
 import com.case_study.model.contract.Contract;
-import com.case_study.model.customer.Customer;
 import com.case_study.service.contract.IContractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -31,5 +30,4 @@ public class ContractController {
     public ModelAndView findAll(@PageableDefault(value = 3) Pageable pageable) {
         return new ModelAndView("contract/index", "contractList", contractService.findAll(pageable));
     }
-
 }

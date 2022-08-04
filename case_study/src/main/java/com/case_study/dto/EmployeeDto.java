@@ -19,7 +19,8 @@ public class EmployeeDto implements Validator {
     @Pattern(regexp = "^([0-9]{9}|[0-9]{12})$",
             message = "Please re-enter in the format: XXXXXXXXX or XXXXXXXXXXXX (X: 0-9)")
     private String employeeIdCard;
-    private double employeeSalary;
+    @NotBlank
+    private String employeeSalary;
     @Pattern(regexp = "^(090|091|\\(84\\)\\+90|\\(84\\)\\+91)[0-9]{7}$",
             message = "Please re-enter in the format: 090xxxxxxx or 091xxxxxxx " +
                     "or (84)+90xxxxxxx or (84)+91xxxxxxx (x: 0-9)")
@@ -79,11 +80,11 @@ public class EmployeeDto implements Validator {
         this.employeeIdCard = employeeIdCard;
     }
 
-    public double getEmployeeSalary() {
+    public String getEmployeeSalary() {
         return employeeSalary;
     }
 
-    public void setEmployeeSalary(double employeeSalary) {
+    public void setEmployeeSalary(String employeeSalary) {
         this.employeeSalary = employeeSalary;
     }
 

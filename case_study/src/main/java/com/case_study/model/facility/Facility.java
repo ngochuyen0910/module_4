@@ -1,6 +1,9 @@
 package com.case_study.model.facility;
 
+import com.case_study.model.contract.Contract;
+
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Facility {
@@ -24,6 +27,9 @@ public class Facility {
     @ManyToOne
     @JoinColumn(name = "facility_type_id", referencedColumnName = "facilityTypeId")
     private FacilityType facilityType;
+
+    @OneToMany(mappedBy = "facility")
+    private Set<Contract> contract;
 
     public Facility() {
     }
@@ -122,5 +128,13 @@ public class Facility {
 
     public void setFacilityType(FacilityType facilityType) {
         this.facilityType = facilityType;
+    }
+
+    public Set<Contract> getContract() {
+        return contract;
+    }
+
+    public void setContract(Set<Contract> contract) {
+        this.contract = contract;
     }
 }

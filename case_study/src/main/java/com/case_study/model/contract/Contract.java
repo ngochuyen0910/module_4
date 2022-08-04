@@ -2,6 +2,7 @@ package com.case_study.model.contract;
 
 import com.case_study.model.customer.Customer;
 import com.case_study.model.employee.Employee;
+import com.case_study.model.facility.Facility;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -25,6 +26,10 @@ public class Contract {
     @ManyToOne
     @JoinColumn(name = "customer_id", referencedColumnName = "customerId")
     private Customer customer;
+
+    @ManyToOne
+    @JoinColumn(name = "facility_id", referencedColumnName = "facilityId")
+    private Facility facility;
 
     public Contract() {
     }
@@ -83,5 +88,13 @@ public class Contract {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public Facility getFacility() {
+        return facility;
+    }
+
+    public void setFacility(Facility facility) {
+        this.facility = facility;
     }
 }
