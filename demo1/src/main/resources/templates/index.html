@@ -1,10 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/layout::head}">
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-$END$
+<h3>TRANSACTION</h3>
+<button>
+    <a th:href="@{transaction/create}">
+        Add new transaction
+    </a>
+</button>
+<form action="/transaction">
+    Search by name:
+    <input name="search" type="text"/>
+    <select name="searchss">
+        <option value="">Chọn loại bất động sản</option>
+        <option value="nha dat">nha dat</option>
+        <option value="dat">dat</option>
+    </select>
+    <input type="submit" value="Search"/>
+</form>
+<table id="transaction">
+    <tr>
+        <th>Transaction Id</th>
+        <th>Customer Name</th>
+        <th>Date</th>
+        <th>Transaction Type</th>
+        <th>Price</th>
+        <th>Area</th>
+        <th>View</th>
+    </tr>
+    <tr th:each="transaction,status : ${transactionList}">
+        <td th:text="${transaction.transactionId}"></td>
+        <td th:text="${transaction.customer.name}"></td>
+        <td th:text="${transaction.date}"></td>
+        <td th:text="${transaction.transactionType}"></td>
+        <td th:text="${transaction.price}"></td>
+        <td th:text="${transaction.area}"></td>
+        <td><button><a th:href="@{/transaction/{id}/detail(id=${transaction.getTransactionId()})}">View</a></td>
+    </tr>
+</table>
+<footer th:replace="/layout :: footer"></footer>
 </body>
 </html>

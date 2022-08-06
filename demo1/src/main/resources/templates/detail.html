@@ -1,10 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/layout::head}">
+    <title>Title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body>
-$END$
+<h3>DETAIL TRANSACTION</h3>
+<button>
+    <a th:href="@{/transaction}">
+        Back to transaction list
+    </a>
+</button>
+<div>
+    <table>
+        <tr>
+            <th>Transaction Id: </th>
+            <td th:text="${transaction.transactionId}"></td>
+        </tr>
+        <tr>
+            <th>Date: </th>
+            <td th:text="${transaction.date}"></td>
+        </tr>
+        <tr>
+            <th>Transaction Type: </th>
+            <td th:text="${transaction.transactionType}"></td>
+        </tr>
+        <tr>
+            <th>Price: </th>
+            <td th:text="${transaction.price}"></td>
+        </tr>
+        <tr>
+            <th>Area: </th>
+            <td th:text="${transaction.area}"></td>
+        </tr>
+        <tr>
+            <th>Customer Name: </th>
+            <td th:text="${transaction.customer.name}"></td>
+        </tr>
+        <tr>
+            <th>Phone Number: </th>
+            <td th:text="${transaction.customer.phoneNumber}"></td>
+        </tr>
+        <tr>
+            <th>Email: </th>
+            <td th:text="${transaction.customer.email}"></td>
+        </tr>
+    </table>
+</div>
+<footer th:replace="/layout :: footer"></footer>
 </body>
 </html>

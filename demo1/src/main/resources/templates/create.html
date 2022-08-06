@@ -1,10 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/layout::head}">
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-$END$
+<h3>ADD NEW TRANSACTION</h3>
+<div id="form">
+    <form th:action="@{/transaction/save}" th:object="${transactionDto}"
+          method="POST" novalidate="novalidate">
+        <div>
+            <label>Transaction Id</label>
+            <input type="text" th:field="*{transactionId}"/>
+            <span style="color: red" th:if="${#fields.hasErrors('transactionId')}" th:errors="*{transactionId}"></span>
+        </div>
+        <div>
+            <label>Customer Name</label>
+            <select th:field="*{customer.customerId}">
+                <option th:each="item:${customerList}" th:value="${item.customerId}"
+                        th:text="${item.name}"></option>
+            </select>
+        </div>
+        <div>
+            <label>Date</label>
+            <input type="date" th:field="*{date}"/>
+            <span style="color: red" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></span>
+        </div>
+        <div>
+            <label>Transaction Type</label>
+            <input type="radio" th:field="*{transactionType}" value="nha dat">
+            <label>Nha dat</label>
+            <input type="radio" th:field="*{transactionType}" value="dat">
+            <label>Dat</label>
+        </div>
+        <div>
+            <label>Price</label>
+            <input type="number" required="true" th:field="*{price}"/>
+            <span style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
+        </div>
+        <div>
+            <label>Area</label>
+            <input type="number" required="true" th:field="*{area}"/>
+            <span style="color: red" th:if="${#fields.hasErrors('area')}" th:errors="*{area}"></span>
+        </div>
+        <input type="submit" value="Save"/>
+        <button style="background: #cccccc">
+            <a th:href="@{/transaction}"/>Cancel
+        </button>
+    </form>
+</div>
+<footer th:replace="/layout :: footer"></footer>
 </body>
 </html>
