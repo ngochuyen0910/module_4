@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/blog/api/v1")
 public class BlogController {
     @Autowired
@@ -36,7 +37,7 @@ public class BlogController {
     @PutMapping("/{id}")
     public ResponseEntity<Blog> updateBlog(@PathVariable int id,
                                            @RequestBody Blog blog) {
-        Blog currentBlog = blogService.findById(id);
+        Blog currentBlog = blogService.findById(id).get();
         if (currentBlog == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -46,5 +47,14 @@ public class BlogController {
 
         blogService.save(currentBlog);
         return new ResponseEntity<>(currentBlog, HttpStatus.OK);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Blog>> findBlogByName(@RequestParam("search") String search) {
+        List<Blog> blogList = blogService.findByName(search);
+        if (blogList.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(blogList, HttpStatus.OK);
     }
 }

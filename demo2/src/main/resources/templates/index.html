@@ -1,10 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-$END$
+<p>
+    <a th:href="@{question/create}">
+        Add new question
+    </a>
+</p>
+<form action="/question/search">
+    Search by title:
+    <input name="searchss" type="text"/>
+    <select name="search">
+        <option value="">Chọn loại câu hỏi</option>
+        <option value="Hoc tap">Hoc tap</option>
+        <option value="Giao vu">Giao vu</option>
+        <option value="Khac">Khac</option>
+    </select>
+
+    <input type="submit" value="Search"/>
+</form>
+<table>
+    <tr>
+        <th>questionId</th>
+        <th>title</th>
+        <th>question type</th>
+        <th>dateCreate</th>
+        <th>status</th>
+        <th>Update</th>
+        <th>Delete</th>
+    </tr>
+    <tr th:each="question,status : ${questionList}">
+        <td th:text="${question.questionId}"></td>
+        <td th:text="${question.title}"></td>
+        <td th:text="${question.questionType.name}"></td>
+        <td th:text="${question.dateCreate}"></td>
+        <td th:text="${question.status}"></td>
+        <td><a th:href="@{/question/{id}/edit(id=${question.getQuestionId()})}">Update</a></td>
+        <td><a th:href="@{/question/{id}/delete(id=${question.getQuestionId()})}">Delete</a></td>
+<!--        <td>-->
+<!--            <button type="button" class="btn btn-primary" data-bs-toggle="modal"-->
+<!--                    th:data-bs-target="'#a' + ${question.questionId}">-->
+<!--                Delete-->
+<!--            </button>-->
+<!--            <div class="modal fade" th:id="a + ${question.questionId}" data-bs-backdrop="static"-->
+<!--                 data-bs-keyboard="false"-->
+<!--                 tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">-->
+<!--                <div class="modal-dialog">-->
+<!--                    <form th:action="@{/question/delete}"-->
+<!--                          method="POST">-->
+<!--                        <div class="modal-content">-->
+<!--                            <div class="modal-header">-->
+<!--                                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>-->
+<!--                                <button type="button" class="btn-close" data-bs-dismiss="modal"-->
+<!--                                        aria-label="Close"></button>-->
+<!--                            </div>-->
+<!--                            <div class="modal-body">-->
+<!--                                Do you want delete-->
+<!--                                <span class="text-info" th:text="${question.title}"></span>-->
+<!--                                <input type="hidden" th:value="${question.questionId}" name="id">-->
+<!--                            </div>-->
+
+<!--                            <button type="submit" class="btn btn-outline-success">Delete</button>-->
+<!--                            <button type="button" class="btn btn-secondary center-pill" data-bs-dismiss="modal">Close-->
+<!--                            </button>-->
+<!--                        </div>-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </td>-->
+    </tr>
+</table>
 </body>
 </html>

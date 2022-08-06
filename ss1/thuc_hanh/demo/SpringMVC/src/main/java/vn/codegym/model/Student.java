@@ -56,3 +56,12 @@ public class Student {
         this.languages = languages;
     }
 }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (o instanceof Product) {
+//            if (this.id == ((Product) o).getId()) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }

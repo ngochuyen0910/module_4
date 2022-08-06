@@ -19,6 +19,7 @@ public class Facility {
     private double poolArea;
     private int numberOfFloors;
     private String facilityFree;
+    private boolean deleteStatus;
 
     @ManyToOne
     @JoinColumn(name = "rent_type_id", referencedColumnName = "rentTypeId")
@@ -136,5 +137,13 @@ public class Facility {
 
     public void setContract(Set<Contract> contract) {
         this.contract = contract;
+    }
+
+    public boolean isDeleteStatus() {
+        return deleteStatus;
+    }
+
+    public void setDeleteStatus(boolean deleteStatus) {
+        this.deleteStatus = deleteStatus;
     }
 }

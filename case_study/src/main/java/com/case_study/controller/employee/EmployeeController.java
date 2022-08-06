@@ -35,12 +35,12 @@ public class EmployeeController {
     @Autowired
     private IPositionService positionService;
 
-    @GetMapping("/a")
-    public String index(Model model) {
-        List<Employee> employeeList = employeeService.findAll();
-        model.addAttribute("employeeList", employeeList);
-        return "employee/index";
-    }
+//    @GetMapping("/a")
+//    public String index(Model model) {
+//        List<Employee> employeeList = employeeService.findAll();
+//        model.addAttribute("employeeList", employeeList);
+//        return "employee/index";
+//    }
 
     @GetMapping("")
     public ModelAndView findAll(@PageableDefault(value = 3) Pageable pageable) {

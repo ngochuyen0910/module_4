@@ -6,9 +6,9 @@
 <body>
 <form method="post" action="">
     <label> Number 1 : </label>
-    <input type="text" name="number1" placeholder="number1"><br>
+    <input type="text" name="number1" placeholder="number1" value="${number1}"><br>
     <label>Number 2 :</label>
-    <input type="text" name="number2" placeholder="number2"><br>
+    <input type="text" name="number2" placeholder="number2" value="${number2}" ><br>
     <button type="submit" name="calculator" value="Addition"> Addition(+)</button>
     <button type="submit" name="calculator" value="Subtraction"> Subtraction(-)</button>
     <button type="submit" name="calculator" value="Multiplication"> Multiplication(*)</button>

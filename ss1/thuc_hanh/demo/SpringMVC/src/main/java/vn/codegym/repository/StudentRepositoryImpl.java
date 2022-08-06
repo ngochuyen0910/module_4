@@ -27,6 +27,8 @@ public class StudentRepositoryImpl implements IStudentRepository {
     public void save(Student student) {
         studentList.add(student);
     }
+   // public Product findById(int id) {
+// return productList.get(productList.indexOf(new Product(id)));
 
     public List<Student> findByName(String keyword) {
         List<Student> result = new ArrayList<>();
@@ -37,4 +39,15 @@ public class StudentRepositoryImpl implements IStudentRepository {
         }
         return result;
     }
+
+//    public void update(int id, Product product) {
+//        for (Product product1 : productList) {
+//            if (product1.getId() == product.getId()) {
+//                product1.setName(product.getName());
+//                product1.setPrice(product.getPrice());
+//                product1.setDescribe(product.getDescribe());
+//                product1.setProducer(product.getProducer());
+//            }
+//        }
+//    }
 }

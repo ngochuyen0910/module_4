@@ -18,6 +18,7 @@ public class Customer {
     private String customerPhone;
     private String customerMail;
     private String customerAddress;
+    private boolean deleteStatus;
 
     @ManyToOne
     @JoinColumn(name= "customer_type_id",referencedColumnName = "customerTypeId")
@@ -115,5 +116,13 @@ public class Customer {
 
     public void setContract(Set<Contract> contract) {
         this.contract = contract;
+    }
+
+    public boolean isDeleteStatus() {
+        return deleteStatus;
+    }
+
+    public void setDeleteStatus(boolean deleteStatus) {
+        this.deleteStatus = deleteStatus;
     }
 }

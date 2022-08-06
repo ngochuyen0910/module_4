@@ -1,10 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-$END$
+<p>
+    <a th:href="@{/question}">
+        Back to question list
+    </a>
+</p>
+<div id="form">
+    <form th:action="@{/question/save}" th:object="${questionDto}"
+          method="POST" novalidate="novalidate">
+        <input type="hidden" th:field="*{questionId}"/>
+        <div>
+            <label>title</label>
+            <input type="text" th:field="*{title}"/>
+            <!--            <span th:if="${#fields.hasErrors('employeeName')}" th:errors="*{employeeName}"></span>-->
+        </div>
+        <div>
+            <label>question</label>
+            <input type="text" th:field="*{question}"/>
+            <!--            <span th:if="${#fields.hasErrors('employeeIdCard')}" th:errors="*{employeeIdCard}"></span>-->
+        </div>
+        <div>
+            <label>question type</label>
+            <select class="form-control" th:field="*{questionType}">
+                <option th:each="item:${questionTypeList}" th:text="${item.name}"
+                        th:value="${item.questionTypeId}"></option>
+            </select>
+        </div>
+        <div>
+            <input type="hidden" th:field="*{answer}"/>
+            <!--            <span th:if="${#fields.hasErrors('employeeIdCard')}" th:errors="*{employeeIdCard}"></span>-->
+        </div>
+        <div>
+            <input type="hidden" th:field="*{dateCreate}"/>
+            <!--            <span th:if="${#fields.hasErrors('employeeSalary')}" th:errors="*{employeeSalary}"></span>-->
+        </div>
+        <div>
+            <input type="hidden" th:field="*{status}"/>
+            <!--            <span th:if="${#fields.hasErrors('employeePhone')}" th:errors="*{employeePhone}"></span>-->
+        </div>
+        <input type="submit" value="Save"/>
+    </form>
+</div>
 </body>
 </html>

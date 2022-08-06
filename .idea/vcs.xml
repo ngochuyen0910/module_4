@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ss1/thuc_hanh/customer-management" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ss15_spring_authorization/spring-security-mysql-demo" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ss6_jpa/thuc_hanh/customer" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ss8_validation/practice/spring-validate-infor-user" vcs="Git" />
+  </component>
+</project>
