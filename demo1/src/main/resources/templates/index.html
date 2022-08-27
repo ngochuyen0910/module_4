@@ -13,8 +13,8 @@
 </button>
 <form action="/transaction">
     Search by name:
-    <input name="search" type="text"/>
-    <select name="searchss">
+    <input style="width: 160px" name="search" type="text"/>
+    <select style="width: 160px" name="searchss">
         <option value="">Chọn loại bất động sản</option>
         <option value="nha dat">nha dat</option>
         <option value="dat">dat</option>
@@ -38,7 +38,9 @@
         <td th:text="${transaction.transactionType}"></td>
         <td th:text="${transaction.price}"></td>
         <td th:text="${transaction.area}"></td>
-        <td><button><a th:href="@{/transaction/{id}/detail(id=${transaction.getTransactionId()})}">View</a></td>
+        <td>
+            <button><a th:href="@{/transaction/{id}/detail(id=${transaction.getTransactionId()})}">View</a></button>
+        </td>
     </tr>
 </table>
 <footer th:replace="/layout :: footer"></footer>
