@@ -62,7 +62,7 @@ public class MedicalRecordController {
         currentMedicalRecord.setDoctor(medicalRecord.getDoctor());
         currentMedicalRecord.setPatient(medicalRecord.getPatient());
 
-        medicalRecordService.save(currentMedicalRecord);
+        medicalRecordService.update(currentMedicalRecord);
         return new ResponseEntity<>(currentMedicalRecord, HttpStatus.OK);
     }
 }

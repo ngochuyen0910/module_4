@@ -20,6 +20,16 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
     }
 
     @Override
+    public List<MedicalRecord> findAllPage(Integer page) {
+        return medicalRecordRepository.findAllPage(page);
+    }
+
+    @Override
+    public List<MedicalRecord> search(String doctor, String name, String reason, String method, Integer page) {
+        return medicalRecordRepository.search(doctor, name, reason, method, page);
+    }
+
+    @Override
     public void save(MedicalRecord medicalRecord) {
         medicalRecordRepository.save(medicalRecord.getPatient().getId(), medicalRecord.getHospitalizedDay(), medicalRecord.getHospitalDischargeDate(),
                 medicalRecord.getReason(), medicalRecord.getMethod(), medicalRecord.getDoctor());
