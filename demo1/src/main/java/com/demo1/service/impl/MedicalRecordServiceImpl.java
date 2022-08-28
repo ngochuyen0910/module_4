@@ -4,6 +4,8 @@ import com.demo1.model.MedicalRecord;
 import com.demo1.repository.MedicalRecordRepository;
 import com.demo1.service.MedicalRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,21 +15,6 @@ import java.util.Optional;
 public class MedicalRecordServiceImpl implements MedicalRecordService {
     @Autowired
     MedicalRecordRepository medicalRecordRepository;
-
-    @Override
-    public List<MedicalRecord> findAll() {
-        return medicalRecordRepository.findAll();
-    }
-
-    @Override
-    public List<MedicalRecord> findAllPage(Integer page) {
-        return medicalRecordRepository.findAllPage(page);
-    }
-
-    @Override
-    public List<MedicalRecord> search(String doctor, String name, String reason, String method, Integer page) {
-        return medicalRecordRepository.search(doctor, name, reason, method, page);
-    }
 
     @Override
     public void save(MedicalRecord medicalRecord) {
@@ -44,6 +31,16 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
     @Override
     public void delete(Integer id) {
         medicalRecordRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<MedicalRecord> findAll(Pageable pageable) {
+        return medicalRecordRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<MedicalRecord> search(String name, String doctor, Pageable pageable) {
+        return medicalRecordRepository.search(name, doctor,pageable);
     }
 
     @Override

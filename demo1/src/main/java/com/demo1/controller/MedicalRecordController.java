@@ -3,11 +3,13 @@ package com.demo1.controller;
 import com.demo1.model.MedicalRecord;
 import com.demo1.service.MedicalRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -18,8 +20,8 @@ public class MedicalRecordController {
     private MedicalRecordService medicalRecordService;
 
     @GetMapping
-    public ResponseEntity<List<MedicalRecord>> getAll() {
-        return new ResponseEntity<>(medicalRecordService.findAll(), HttpStatus.OK);
+    public ResponseEntity<Page<MedicalRecord>> getAll(@PageableDefault(value = 3) Pageable pageable) {
+        return new ResponseEntity<>(medicalRecordService.findAll(pageable), HttpStatus.OK);
     }
 
     @PostMapping
@@ -64,6 +66,11 @@ public class MedicalRecordController {
 
         medicalRecordService.update(currentMedicalRecord);
         return new ResponseEntity<>(currentMedicalRecord, HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<MedicalRecord>> search(@RequestParam String search,@RequestParam String searchss,  @PageableDefault(value = 3) Pageable pageable) {
+        return new ResponseEntity<>(medicalRecordService.search(search,searchss, pageable), HttpStatus.OK);
     }
 }
 

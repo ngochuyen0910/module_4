@@ -1,6 +1,8 @@
 package com.demo1.repository;
 
 import com.demo1.model.MedicalRecord;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -14,19 +16,20 @@ import java.util.Optional;
 @Repository
 public interface MedicalRecordRepository extends JpaRepository<MedicalRecord, Integer> {
 
-    @Query(value = "select * from patient limit :page, 5", nativeQuery = true)
-    List<MedicalRecord> findAllPage(@Param("page") Integer page);
-
     @Query(value = "select * from medical_record", nativeQuery = true)
-    List<MedicalRecord> findAll();
+    Page<MedicalRecord> findAll(Pageable pageable);
 
     @Query(value = "select * from medical_record where id = :id", nativeQuery = true)
     Optional<MedicalRecord> findById(@Param("id") Integer id);
 
-    @Query(value = "select medical_record.* from medical_record join patient on medical_record.patient_id = medical_record.id " +
-            " where medical_record.doctor like %:doctor% and patienter.name like %:name% and medical_record.reason like %:reason% " +
-            " and medical_record.method like %:method% limit :page, 5", nativeQuery = true)
-    List<MedicalRecord> search(@Param("doctor") String doctor, @Param("name") String name, @Param("reason") String reason, @Param("method") String method, @Param("page") Integer page);
+//    @Query(value = "select medical_record.* from medical_record join patient on medical_record.patient_id = medical_record.id " +
+//            " where medical_record.doctor like %:doctor% and patienter.name like %:name% and medical_record.reason like %:reason% " +
+//            " and medical_record.method like %:method% limit :page, 5", nativeQuery = true)
+//    List<MedicalRecord> search(@Param("doctor") String doctor, @Param("name") String name, @Param("reason") String reason, @Param("method") String method, @Param("page") Integer page);
+
+    @Query(value = "select medical_record.* from medical_record left join patient on medical_record.patient_id = patient.id where patient.name like :search and doctor like :searchss",
+            nativeQuery = true)
+    Page<MedicalRecord> search(@Param("name") String name, @Param("doctor") String doctor, Pageable pageable);
 
     @Modifying
     @Transactional

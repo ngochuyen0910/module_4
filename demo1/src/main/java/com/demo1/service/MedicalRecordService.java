@@ -1,16 +1,15 @@
 package com.demo1.service;
 
 import com.demo1.model.MedicalRecord;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface MedicalRecordService {
-    List<MedicalRecord> findAll();
+    Page<MedicalRecord> findAll(Pageable pageable);
 
-    List<MedicalRecord> findAllPage(Integer page);
-
-    List<MedicalRecord> search(String doctor, String name, String reason, String method, Integer page);
+    Page<MedicalRecord> search(String name, String doctor, Pageable pageable);
 
     Optional<MedicalRecord> findById(Integer id);
 
